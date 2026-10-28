@@ -1,0 +1,43 @@
+
+services:
+  database:
+    image: mariadb:latest
+    container_name: app_database
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_DATABASE: inventory
+      
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+  backend:
+    build: ./backend
+    container_name: app_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=database   # Matches the service name above!
+      - DB_USER=root
+      - DB_PASSWORD=1234
+      - DB_NAME=inventory
+    depends_on:
+      - database
+
+  frontend:
+    build: ./frontend
+    container_name: app_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+  
+  
+
+volumes:
+  db_data:

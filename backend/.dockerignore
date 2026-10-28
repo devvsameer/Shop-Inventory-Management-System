@@ -1,0 +1,8 @@
+# .dockerignore example
+.env
+.git
+npm-debug.log
+Dockerfile
+.dockerignore
+tests
+coverage
