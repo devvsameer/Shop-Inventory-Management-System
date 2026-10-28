@@ -1,4 +1,4 @@
-# Billing System
+# Shop Inventory Management System
 
 A full-stack inventory and billing application built with a React frontend, Express backend, and MariaDB database. The project includes product listing, search, CRUD operations, and Docker-based setup for local development.
 
